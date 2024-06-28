@@ -703,7 +703,7 @@ function Session:event_stopped(stopped)
     local thread = self.threads[stopped.threadId]
     assert(thread, 'Thread not found: ' .. stopped.threadId)
 
-    local err, response = self:request('stackTrace', { threadId = stopped.threadId; })
+    local err, response = self:request('stackTrace', { threadId = stopped.threadId, startFrame = 0 })
     if err then
       utils.notify('Error retrieving stack traces: ' .. utils.fmt_error(err), vim.log.levels.ERROR)
       return
